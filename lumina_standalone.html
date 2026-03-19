@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lumina helps local businesses shine online with modern, high-converting website revamps." />
+  <title>Lumina — Website Revamps for Local Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: #111827; background: #fff; -webkit-font-smoothing: antialiased; }
+
+    :root {
+      --lumina-100: #dce6ff;
+      --lumina-500: #3a5bff;
+      --lumina-600: #2238f5;
+      --lumina-700: #1a28e0;
+      --accent-400: #ff9e38;
+      --accent-500: #ff8010;
+      --accent-600: #f06406;
+      --gray-50:  #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --gray-950: #030712;
+    }
+
+    .container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    .badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); border-radius: 9999px; padding: .375rem 1rem; font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.9); }
+    .badge-dot { width: .5rem; height: .5rem; background: var(--accent-400); border-radius: 50%; animation: pulse 2s infinite; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent-500); color: #fff; font-weight: 700; padding: 1rem 2rem; border-radius: 9999px; font-size: 1.125rem; text-decoration: none; transition: background .2s, transform .2s; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--accent-600); transform: scale(1.04); }
+    .btn-outline { display: inline-flex; align-items: center; background: rgba(255,255,255,.12); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.3); color: #fff; font-weight: 600; padding: 1rem 2rem; border-radius: 9999px; font-size: 1.125rem; text-decoration: none; transition: background .2s; }
+    .btn-outline:hover { background: rgba(255,255,255,.22); }
+    .btn-dark { display: inline-flex; align-items: center; gap: .5rem; background: var(--lumina-600); color: #fff; font-weight: 700; padding: .875rem 1.75rem; border-radius: 9999px; text-decoration: none; transition: background .2s; }
+    .btn-dark:hover { background: var(--lumina-700); }
+    .section-label { display: block; color: var(--lumina-500); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--gray-900); margin: .75rem 0 1.25rem; line-height: 1.1; }
+    .section-sub { color: var(--gray-500); font-size: 1.1rem; line-height: 1.7; }
+    .text-center { text-align: center; }
+    .card { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 1rem; padding: 1.75rem; transition: transform .25s, box-shadow .25s, background .25s, border-color .25s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.08); background: #fff; border-color: #b9ccff; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+    /* Navbar */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; transition: background .3s, box-shadow .3s; }
+    #navbar.scrolled { background: rgba(255,255,255,.96); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--gray-100); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: .625rem; text-decoration: none; }
+    .nav-logo-icon { width: 2rem; height: 2rem; border-radius: .5rem; background: linear-gradient(135deg, #111455, #1a28e0, #3a5bff); display: flex; align-items: center; justify-content: center; }
+    .nav-logo-text { font-weight: 800; font-size: 1.25rem; letter-spacing: -.02em; color: #fff; transition: color .3s; }
+    #navbar.scrolled .nav-logo-text { color: var(--gray-900); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: rgba(255,255,255,.8); text-decoration: none; transition: color .2s; }
+    #navbar.scrolled .nav-links a { color: var(--gray-500); }
+    .nav-links a:hover { color: var(--lumina-500) !important; }
+    .nav-cta { background: var(--accent-500); color: #fff !important; font-size: .875rem; font-weight: 700; padding: .625rem 1.25rem; border-radius: 9999px; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: var(--accent-600) !important; }
+    .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; color: #fff; padding: .5rem; border-radius: .5rem; }
+    #navbar.scrolled .nav-mobile-btn { color: var(--gray-700); }
+    #mobile-menu { display: none; background: #fff; border-top: 1px solid var(--gray-100); padding: 1rem 1.5rem 1.5rem; flex-direction: column; gap: 1rem; }
+    #mobile-menu a { color: var(--gray-700); font-weight: 500; text-decoration: none; padding: .25rem 0; }
+    @media (max-width: 768px) { .nav-links { display: none; } .nav-mobile-btn { display: block; } }
+
+    /* Hero */
+    #hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #111455 0%, #1a28e0 60%, #3a5bff 100%); position: relative; overflow: hidden; padding: 7rem 0 5rem; }
+    .hero-orb-1 { position: absolute; top: 25%; right: 25%; width: 18rem; height: 18rem; background: rgba(255,128,16,.18); border-radius: 50%; filter: blur(60px); animation: float 6s ease-in-out infinite; }
+    .hero-orb-2 { position: absolute; bottom: 20%; left: 20%; width: 24rem; height: 24rem; background: rgba(58,91,255,.18); border-radius: 50%; filter: blur(80px); animation: float 8s ease-in-out infinite; animation-delay: 1s; }
+    .hero-content { position: relative; max-width: 48rem; }
+    .hero-badge { margin-bottom: 2rem; }
+    .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; color: #fff; line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1.5rem; }
+    .hero-title .highlight { color: var(--accent-400); }
+    .hero-sub { font-size: 1.2rem; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 2.5rem; max-width: 38rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.12); }
+    .hero-stat-num { font-size: 2rem; font-weight: 900; color: #fff; }
+    .hero-stat-label { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: .1rem; }
+    .hero-wave { position: absolute; bottom: 0; left: 0; right: 0; }
+
+    /* Services */
+    #services { padding: 6rem 0; background: #fff; }
+    .services-header { margin-bottom: 4rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.5rem; }
+    .service-card { position: relative; }
+    .service-card-icon { color: var(--lumina-500); margin-bottom: 1.25rem; }
+    .service-card-icon svg { width: 1.75rem; height: 1.75rem; }
+    .service-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--gray-900); margin-bottom: .75rem; }
+    .service-card p { color: var(--gray-500); line-height: 1.65; font-size: .95rem; }
+    .service-badge { position: absolute; top: 1.25rem; right: 1.25rem; background: var(--accent-500); color: #fff; font-size: .75rem; font-weight: 700; padding: .25rem .75rem; border-radius: 9999px; }
+
+    /* Process */
+    #process { padding: 6rem 0; background: var(--gray-50); }
+    .process-steps { display: flex; flex-direction: column; gap: 2rem; position: relative; max-width: 44rem; margin: 0 auto; }
+    .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+    .step-number-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .step-circle { width: 3rem; height: 3rem; background: linear-gradient(135deg, #111455, #3a5bff); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: .95rem; box-shadow: 0 4px 16px rgba(58,91,255,.35); flex-shrink: 0; }
+    .step-line { width: 2px; flex: 1; background: linear-gradient(to bottom, #b9ccff, transparent); margin-top: .5rem; min-height: 2rem; }
+    .process-step:last-child .step-line { display: none; }
+    .step-card { background: #fff; border: 1px solid var(--gray-100); border-radius: 1rem; padding: 1.75rem; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+    .step-num-label { font-size: 2.5rem; font-weight: 900; color: var(--lumina-100); line-height: 1; margin-bottom: .5rem; }
+    .step-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--gray-900); margin-bottom: .625rem; }
+    .step-card p { color: var(--gray-500); line-height: 1.65; font-size: .95rem; }
+
+    /* Why Us */
+    #why-us { padding: 6rem 0; background: #fff; }
+    .why-grid { display: grid; gap: 4rem; }
+    @media (min-width: 1024px) { .why-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+    .why-text { color: var(--gray-500); line-height: 1.75; font-size: 1.05rem; margin-bottom: 1.25rem; }
+    .reasons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.25rem; }
+    .reason-card { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: .875rem; padding: 1.5rem; }
+    .reason-icon { font-size: 1.75rem; margin-bottom: .75rem; }
+    .reason-card h3 { font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: .5rem; }
+    .reason-card p { font-size: .875rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* Contact */
+    #contact { padding: 6rem 0; background: linear-gradient(135deg, #111455 0%, #1a28e0 60%, #3a5bff 100%); position: relative; overflow: hidden; }
+    .contact-orb-1 { position: absolute; top: 0; right: 0; width: 24rem; height: 24rem; background: rgba(255,128,16,.1); border-radius: 50%; filter: blur(60px); }
+    .contact-orb-2 { position: absolute; bottom: 0; left: 0; width: 18rem; height: 18rem; background: rgba(58,91,255,.1); border-radius: 50%; filter: blur(60px); }
+    .contact-grid { display: grid; gap: 4rem; position: relative; }
+    @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+    .contact-left { color: #fff; }
+    .contact-label { display: block; color: var(--accent-400); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .75rem; }
+    .contact-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; }
+    .contact-sub { color: rgba(255,255,255,.7); line-height: 1.75; font-size: 1.05rem; margin-bottom: 2.5rem; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-info-item { display: flex; align-items: center; gap: 1rem; }
+    .ci-label { font-size: .7rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; }
+    .ci-value { color: #fff; font-weight: 500; font-size: .95rem; }
+    .contact-form-wrap { background: #fff; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 25px 60px rgba(0,0,0,.25); }
+    .form-title { font-size: 1.5rem; font-weight: 900; color: var(--gray-900); margin-bottom: .25rem; }
+    .form-sub { font-size: .875rem; color: var(--gray-400); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: .375rem; margin-bottom: 1rem; }
+    .form-group label { font-size: .875rem; font-weight: 500; color: var(--gray-700); }
+    .form-group input, .form-group textarea { border: 1.5px solid var(--gray-200); border-radius: .75rem; padding: .75rem 1rem; font-size: .875rem; font-family: inherit; width: 100%; outline: none; transition: border-color .2s, box-shadow .2s; color: var(--gray-900); }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--lumina-500); box-shadow: 0 0 0 3px rgba(58,91,255,.12); }
+    .form-group textarea { resize: none; }
+    .btn-submit { width: 100%; background: var(--accent-500); color: #fff; font-weight: 700; padding: .875rem; border-radius: .75rem; border: none; cursor: pointer; font-size: 1rem; font-family: inherit; transition: background .2s; }
+    .btn-submit:hover { background: var(--accent-600); }
+    .form-note { text-align: center; color: var(--gray-400); font-size: .75rem; margin-top: .75rem; }
+    .form-success { text-align: center; padding: 3rem 1rem; }
+    .form-success .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .form-success h3 { font-size: 1.5rem; font-weight: 900; color: var(--gray-900); margin-bottom: .5rem; }
+    .form-success p { color: var(--gray-500); }
+
+    /* Footer */
+    footer { background: var(--gray-950); color: #fff; padding: 3rem 0; }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .footer-logo { display: flex; align-items: center; gap: .5rem; }
+    .footer-logo-text { font-weight: 800; font-size: 1.25rem; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: #6b7280; font-size: .875rem; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { color: #374151; font-size: .875rem; }
+
+    @media (max-width: 640px) { .hero-ctas { flex-direction: column; } .btn-primary, .btn-outline { justify-content: center; } }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1L16 5V13L9 17L2 13V5L9 1Z" fill="white" fill-opacity="0.9"/>
+            <path d="M9 5L13 7.5V12.5L9 15L5 12.5V7.5L9 5Z" fill="white" fill-opacity="0.4"/>
+          </svg>
+        </div>
+        <span class="nav-logo-text">Lumina</span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get a Free Audit</a>
+      </div>
+      <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
+        <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7H19M3 11H19M3 15H19"/></svg>
+        <svg id="menu-icon-close" style="display:none" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4L18 18M18 4L4 18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu">
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#process" onclick="closeMobileMenu()">Process</a>
+    <a href="#why-us" onclick="closeMobileMenu()">Why Us</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#contact" class="nav-cta" onclick="closeMobileMenu()">Get a Free Audit</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge"><span class="badge-dot"></span>Website Revamps for Local Businesses</span>
+      </div>
+      <h1 class="hero-title">Your business deserves a website that <span class="highlight">actually works.</span></h1>
+      <p class="hero-sub">Lumina transforms outdated local business websites into modern, high-converting experiences — so you stop losing customers before they ever walk through the door.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get a Free Website Audit</a>
+        <a href="#services" class="btn-outline">See What We Do</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">48h</div><div class="hero-stat-label">First draft delivered</div></div>
+        <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Local business focus</div></div>
+        <div><div class="hero-stat-num">$0</div><div class="hero-stat-label">Audit cost</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" fill="none" preserveAspectRatio="none" style="width:100%;height:4rem;display:block;">
+      <path d="M0 80H1440V40C1200 0 900 80 720 60C540 40 240 0 0 40V80Z" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<section id="services" style="padding:6rem 0;background:#fff;">
+  <div class="container">
+    <div class="services-header text-center">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Everything your website needs</h2>
+      <p class="section-sub" style="max-width:36rem;margin:0 auto;">From a full rebuild to a targeted refresh, we give local businesses the digital presence they deserve.</p>
+    </div>
+    <div class="services-grid">
+      <div class="card service-card">
+        <span class="service-badge">Most popular</span>
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="22" height="16" rx="2"/><path d="M9 21L14 25L19 21"/><path d="M9 11H19M9 15H15"/></svg></div>
+        <h3>Website Revamp</h3>
+        <p>We take your outdated site and rebuild it from the ground up — modern design, fast load times, and built to convert visitors into paying customers.</p>
+      </div>
+      <div class="card service-card">
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="14" cy="14" r="11"/><path d="M14 3C14 3 10 9 10 14C10 19 14 25 14 25"/><path d="M14 3C14 3 18 9 18 14C18 19 14 25 14 25"/><path d="M3 14H25"/></svg></div>
+        <h3>Mobile-First Design</h3>
+        <p>Over 60% of your customers find you on their phone. We ensure your site looks stunning and functions perfectly on every screen size.</p>
+      </div>
+      <div class="card service-card">
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4L17 10L24 11L19 16L20 23L14 20L8 23L9 16L4 11L11 10L14 4Z"/></svg></div>
+        <h3>SEO Foundation</h3>
+        <p>Every site we build comes with proper meta tags, structured data, and Google-ready optimization so local customers can find you when it matters.</p>
+      </div>
+      <div class="card service-card">
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20L10 14L14 18L20 10L24 14"/><path d="M20 10H24V14"/></svg></div>
+        <h3>Free Website Audit</h3>
+        <p>Not sure where to start? We'll review your current site and give you a clear picture of what's hurting your online presence — completely free.</p>
+      </div>
+      <div class="card service-card">
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="12" height="16" rx="1.5"/><path d="M17 8H23L23 25H8V19"/><path d="M9 9H13M9 13H13"/></svg></div>
+        <h3>Content Refresh</h3>
+        <p>We update your copy, imagery, and messaging to match your brand today — not the version of your business from five years ago.</p>
+      </div>
+      <div class="card service-card">
+        <div class="service-card-icon"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4V14L20 20"/><circle cx="14" cy="14" r="10"/></svg></div>
+        <h3>Fast Turnaround</h3>
+        <p>We deliver a working draft within 48 hours so you can see real progress fast and start getting feedback from your customers sooner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="padding:6rem 0;background:#f9fafb;">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Simple. Fast. Done right.</h2>
+      <p class="section-sub" style="max-width:30rem;margin:0 auto;">Our process is built around making this easy for you — not requiring you to become a web expert.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-number-col"><div class="step-circle">1</div><div class="step-line"></div></div><div class="step-card"><div class="step-num-label">01</div><h3>Free Website Audit</h3><p>We review your current site, identify what's costing you customers, and walk you through exactly what needs to change — no strings attached.</p></div></div>
+      <div class="process-step"><div class="step-number-col"><div class="step-circle">2</div><div class="step-line"></div></div><div class="step-card"><div class="step-num-label">02</div><h3>Proposal & Alignment</h3><p>You get a clear plan with scope, timeline, and pricing. We align on your goals and brand so there are no surprises.</p></div></div>
+      <div class="process-step"><div class="step-number-col"><div class="step-circle">3</div><div class="step-line"></div></div><div class="step-card"><div class="step-num-label">03</div><h3>Design & Build</h3><p>Our team gets to work. You'll see a working draft within 48 hours, giving you a real preview you can share and gather feedback on.</p></div></div>
+      <div class="process-step"><div class="step-number-col"><div class="step-circle">4</div><div class="step-line"></div></div><div class="step-card"><div class="step-num-label">04</div><h3>Review & Refine</h3><p>We incorporate your feedback through revision rounds until the site is exactly how you want it.</p></div></div>
+      <div class="process-step"><div class="step-number-col"><div class="step-circle">5</div><div class="step-line"></div></div><div class="step-card"><div class="step-num-label">05</div><h3>Launch</h3><p>Your new site goes live. We handle the technical side so you can focus on running your business.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="why-us" style="padding:6rem 0;background:#fff;">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left">
+        <span class="section-label">Why Lumina</span>
+        <h2 class="section-title">The gap is real — and we're here to close it.</h2>
+        <p class="why-text">Most local businesses have websites that are years behind. They lose potential customers every day to competitors with better-looking, faster, more trustworthy sites.</p>
+        <p class="why-text">Lumina exists to fix that. We identified this gap in the market and built a service specifically designed to be accessible, fast, and effective for small and local businesses.</p>
+        <a href="#contact" class="btn-dark">Start with a Free Audit <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8H13M9 4L13 8L9 12"/></svg></a>
+      </div>
+      <div class="reasons-grid">
+        <div class="reason-card"><div class="reason-icon">🏪</div><h3>Local Business Specialists</h3><p>We focus exclusively on local businesses. We understand your customers, your market, and what actually drives foot traffic and calls.</p></div>
+        <div class="reason-card"><div class="reason-icon">⚡</div><h3>You See Results Quickly</h3><p>No months-long projects. You get a real, working draft in 48 hours — not wireframes or mockups, an actual website you can share.</p></div>
+        <div class="reason-card"><div class="reason-icon">💬</div><h3>Plain-English Communication</h3><p>No jargon, no tech speak. We explain everything clearly so you always know what we're doing and why.</p></div>
+        <div class="reason-card"><div class="reason-icon">🎯</div><h3>Built to Convert</h3><p>Pretty websites are nice. Websites that turn visitors into customers are better. Every decision we make is focused on your bottom line.</p></div>
+        <div class="reason-card"><div class="reason-icon">🔍</div><h3>Honest Audits, No Upsells</h3><p>Your free audit is actually free — and honest. We'll only recommend what genuinely benefits your business.</p></div>
+        <div class="reason-card"><div class="reason-icon">🤝</div><h3>Partnership Mentality</h3><p>We're building our reputation alongside your business. Your success is our portfolio. We're invested in getting this right.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-orb-1"></div>
+  <div class="contact-orb-2"></div>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="contact-label">Get Started</span>
+        <h2 class="contact-title">Ready to light up your online presence?</h2>
+        <p class="contact-sub">Reach out and we'll give you a free, no-obligation audit of your current website. You'll walk away with a clear picture of what's working, what isn't, and how we can help.</p>
+        <div class="contact-info">
+          <div class="contact-info-item"><span style="font-size:1.5rem;">📧</span><div><div class="ci-label">Email</div><div class="ci-value">hello@lumina.agency</div></div></div>
+          <div class="contact-info-item"><span style="font-size:1.5rem;">📍</span><div><div class="ci-label">Based in</div><div class="ci-value">Serving local businesses everywhere</div></div></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <div id="form-content">
+          <h3 class="form-title">Get your free audit</h3>
+          <p class="form-sub">No cost, no commitment, no spam.</p>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group"><label>Your Name</label><input type="text" required placeholder="Alex Johnson" /></div>
+              <div class="form-group"><label>Business Name</label><input type="text" required placeholder="Main St. Bakery" /></div>
+            </div>
+            <div class="form-group"><label>Email Address</label><input type="email" required placeholder="you@yourbusiness.com" /></div>
+            <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(555) 000-0000" /></div>
+            <div class="form-group"><label>Current website URL (if any)</label><textarea rows="3" placeholder="https://yoursite.com — or tell us a bit about your business"></textarea></div>
+            <button type="submit" class="btn-submit">Request My Free Audit →</button>
+            <p class="form-note">We respond within 24 hours. No spam, ever.</p>
+          </form>
+        </div>
+        <div id="form-success" style="display:none;" class="form-success">
+          <div class="success-icon">🎉</div>
+          <h3>We're on it!</h3>
+          <p>We'll be in touch within 24 hours with your free audit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div class="nav-logo-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1L16 5V13L9 17L2 13V5L9 1Z" fill="white" fill-opacity="0.9"/><path d="M9 5L13 7.5V12.5L9 15L5 12.5V7.5L9 5Z" fill="white" fill-opacity="0.4"/></svg></div>
+        <span class="footer-logo-text" style="margin-left:.5rem;">Lumina</span>
+      </div>
+      <nav class="footer-links">
+        <a href="#services">Services</a><a href="#process">Process</a><a href="#why-us">Why Us</a><a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> Lumina. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+  let menuOpen = false;
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('mobile-menu').style.display = menuOpen ? 'flex' : 'none';
+    document.getElementById('menu-icon-open').style.display = menuOpen ? 'none' : 'block';
+    document.getElementById('menu-icon-close').style.display = menuOpen ? 'block' : 'none';
+  }
+  function closeMobileMenu() {
+    menuOpen = false;
+    document.getElementById('mobile-menu').style.display = 'none';
+    document.getElementById('menu-icon-open').style.display = 'block';
+    document.getElementById('menu-icon-close').style.display = 'none';
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.card, .step-card, .reason-card').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
